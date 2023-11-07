@@ -13,32 +13,6 @@ const app = express();
 /* cssとか画像の入ったファイルの読み込み　cssの適用のために必要 */
 app.use(express.static('public'));
 
-/* 接続用の記述だけどできなかった　そもそもコマンドプロンプトでnpmがつかえなかった */
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'guit15sk',
-  database: 'progate',
-});
-
-connection.connect((err) => {
-  if (err) {
-    console.log('error connecting:' + err.stack);
-    return;
-  }
-  console.log('success');
-});
-
-app.get('/sql', (req, res) => {
-  connection.query(
-    'SELECT * FROM items',
-    (error, results) => {
-      console.log(results);
-      res.render('hello.ejs');
-    }
-  );
-});
-
 /* ルーティング　urlにアクセスしたときに何するかの処理 */
 app.get('/', (req, res) => {
     res.render('top.ejs');
